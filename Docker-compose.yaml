@@ -1,9 +1,8 @@
 version: '3.1'
 
 services:
-  db:
+  mysql_instance_0:
     image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: admin
@@ -11,24 +10,24 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
-      - "3306:3306"
+      - "7071:3306"
     volumes:
-      - my-db:/var/lib/mysql
+      - money_honey_db:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - moneyhoney
 
-  phpmyadmin:
+  phpmyadmin_instance_0:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
-      - "8080:80"
+      - "7070:80"
     environment:
-      PMA_HOST: db
+      PMA_HOST: mysql_instance_0
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: admin
     depends_on:
-      - db
+      - mysql_instance_0
     networks:
       - moneyhoney
 
@@ -37,4 +36,4 @@ networks:
     external: true
 
 volumes:
-  my-db:
+  money_honey_db:
