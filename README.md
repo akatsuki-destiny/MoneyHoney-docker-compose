@@ -1,7 +1,8 @@
+# MONEY HONEY DOCKER COMPOSE
+
+### SETUP
+
 ```bash
-docker network create moneyhoney
+make setup
 ```
 
-```
-docker compose up --build
-```
