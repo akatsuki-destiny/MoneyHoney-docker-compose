@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  mysql_instance_0:
+  mysql_instance:
     image: mysql:latest
     restart: always
     environment:
@@ -17,17 +17,17 @@ services:
     networks:
       - moneyhoney
 
-  phpmyadmin_instance_0:
+  phpmyadmin_instance:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
       - "7070:80"
     environment:
-      PMA_HOST: mysql_instance_0
+      PMA_HOST: mysql_instance
       PMA_PORT: 3306
       MYSQL_ROOT_PASSWORD: admin
     depends_on:
-      - mysql_instance_0
+      - mysql_instance
     networks:
       - moneyhoney
 
