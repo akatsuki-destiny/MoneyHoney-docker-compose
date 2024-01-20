@@ -5,12 +5,12 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: money_honey
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - "7071:3306"
+      - "${MYSQL_PORT}:3306"
     volumes:
       - money_honey_db:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -21,11 +21,11 @@ services:
     image: phpmyadmin/phpmyadmin:latest
     restart: always
     ports:
-      - "7070:80"
+      - "${PMA_PORT}:80"
     environment:
       PMA_HOST: mysql_instance
       PMA_PORT: 3306
-      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     depends_on:
       - mysql_instance
     networks:
