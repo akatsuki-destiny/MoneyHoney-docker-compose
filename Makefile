@@ -1,4 +1,4 @@
-# Makefile
+.PHONY: setup down
 
 setup:
 	@echo "Creating Docker network..."
